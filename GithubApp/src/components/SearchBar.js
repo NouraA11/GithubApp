@@ -11,7 +11,7 @@ const SearchBar = () => {
             inputContainerStyle={styles.SearchBar}
             round
             placeholder="Search here ..."
-            placeholderTextColor="white"
+            placeholderTextColor="black"
             // searchIcon={}
             value={searchValue}
             onChangeText={setSearchValue}

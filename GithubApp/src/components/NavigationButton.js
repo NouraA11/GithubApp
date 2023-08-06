@@ -6,22 +6,20 @@ import { Icon } from "react-native-elements";
 const NavigationButton = () => {
     const navigation = useNavigation();
     const screenName = useNavigationState((state) => state.routes[state.index].name);
-    const [iconName, setIconName] = useState('home');
+    const [iconName, setIconName] = useState('favorite-border');
 
     const handleClick = () => {
-        if (screenName == "Home") {
-            navigation.navigate('Favorites');
-            setIconName('favorite')
+        if (screenName == "Favorites") {
+            navigation.navigate('Home');
         }
         else {
-            navigation.navigate('Home');
-            setIconName('home');
+            navigation.navigate('Favorites');
         }
     }
 
     return (
         <TouchableOpacity onPress={handleClick}>
-            <Icon name={iconName} />
+            <Icon name={screenName == "Favorites" ? 'home' : 'favorite-border'} size={30} />
         </TouchableOpacity>
     );
 }
