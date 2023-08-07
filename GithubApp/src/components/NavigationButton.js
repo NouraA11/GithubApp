@@ -6,7 +6,6 @@ import { Icon } from "react-native-elements";
 const NavigationButton = () => {
     const navigation = useNavigation();
     const screenName = useNavigationState((state) => state.routes[state.index].name);
-    const [iconName, setIconName] = useState('favorite-border');
 
     const handleClick = () => {
         if (screenName == "Favorites") {

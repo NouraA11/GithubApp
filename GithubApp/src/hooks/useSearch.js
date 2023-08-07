@@ -26,7 +26,7 @@ const useSearch = (query) => {
                         return pages.length + 1
                     }
                 },
-                // enabled: query
+                enabled: query !== ''
             }
         )
     );
