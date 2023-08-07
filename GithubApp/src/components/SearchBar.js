@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { SearchBar as DefaultSearchBar } from "react-native-elements";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
-const SearchBar = () => {
+const SearchBar = ({ onChangeText }) => {
     const [searchValue, setSearchValue] = useState('');
+
+    const handleSearch = (value) => {
+        setSearchValue(value)
+        onChangeText(value)
+    }
 
     return (
         <DefaultSearchBar
@@ -12,9 +17,8 @@ const SearchBar = () => {
             round
             placeholder="Search here ..."
             placeholderTextColor="black"
-            // searchIcon={}
             value={searchValue}
-            onChangeText={setSearchValue}
+            onChangeText={handleSearch}
         />
     );
 }
