@@ -15,6 +15,7 @@ const SearchBar = ({ onChangeText }) => {
         <DefaultSearchBar
             containerStyle={styles.SearchBarContainer}
             inputContainerStyle={styles.SearchBar}
+            inputStyle={styles.Text}
             round
             placeholder="Search here ..."
             placeholderTextColor="black"
@@ -34,7 +35,16 @@ const styles = StyleSheet.create({
     },
     SearchBar: {
         width: '100%',
-        backgroundColor: 'lightgrey',
+        backgroundColor: 'white',
+        // borderWidth: 2, //didn't work
+        borderBottomWidth: 2,
+        borderTopWidth: 2,
+        borderLeftWidth: 2,
+        borderRightWidth: 2,
+        borderColor: 'lightblue',
         paddingHorizontal: 10,
-    }
+    },
+    Text: {
+        color: 'black'
+    },
 })
