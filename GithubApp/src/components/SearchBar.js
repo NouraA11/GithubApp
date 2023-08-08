@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { SearchBar as DefaultSearchBar } from "react-native-elements";
 import { StyleSheet } from "react-native";
+import { useDebounce } from "../hooks/useDebounce";
 
 const SearchBar = ({ onChangeText }) => {
-    const [searchValue, setSearchValue] = useState('');
+    const [searchValue, setSearchValue] = useDebounce();
 
     const handleSearch = (value) => {
         setSearchValue(value)
