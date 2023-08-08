@@ -3,12 +3,15 @@ import { TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite, searchFavorite } from "../reducers/Favorite";
+import { useNavigationState } from "@react-navigation/native";
 
 const FavoriteButton = ({ repo }) => {
     const dispatch = useDispatch();
-    const [iconName, setIconName] = useState('favorite');
+    const [iconName, setIconName] = useState('favorite-border');
     const [isFavorite, setIsFavorite] = useState(false);
     const favoriteList = useSelector((state) => state.Favorite);
+    const screenName = useNavigationState((state) => state.routes[state.index].name);
+
 
     const searchFavorite = () => {
         const repository = favoriteList?.filter((favRepo) => favRepo.id === repo.id);
@@ -21,20 +24,20 @@ const FavoriteButton = ({ repo }) => {
 
     useEffect(() => {
         setIsFavorite(searchFavorite)
-        if (isFavorite) {
+        if (isFavorite || screenName === 'Favorites') {
             setIconName('favorite')
         } else {
             setIconName('favorite-border')
         }
-    }, [isFavorite])
+    }, [])
 
     const handleClick = () => {
         if (searchFavorite()) {
-            dispatch(removeFavorite(repo))
             setIconName('favorite-border')
+            dispatch(removeFavorite(repo))
         } else {
-            dispatch(addFavorite(repo))
             setIconName('favorite')
+            dispatch(addFavorite(repo))
         }
     }
 
