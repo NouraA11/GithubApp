@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { View, StyleSheet } from "react-native";
 import FavoriteButton from "./FavoriteButton";
 import { Card as DefaultCard } from 'react-native-elements';
@@ -9,16 +9,15 @@ const Card = ({ repo }) => {
     return (
         <DefaultCard
             containerStyle={styles.Card}>
-            <View style={styles.FavoriteButton} >
-                <FavoriteButton />
+            <View style={styles.ColumnContainer} >
+                <DefaultCard.Title style={styles.Title}>
+                    {repo.name}
+                </DefaultCard.Title>
+                <FavoriteButton repo={repo} />
             </View>
-            <DefaultCard.Title style={styles.Title}>
-                {repo.name}
-            </DefaultCard.Title>
-            <View style={styles.ColumnContainer}>
-                <Text style={styles.Text}>{repo.forks_count} forks |</Text>
-                <Text style={styles.Text}>updated at: {moment(repo.updated_at).format('DD/MM/YYYY')}</Text>
-            </View>
+            <Text style={styles.Text}>
+                {repo.forks_count} forks | updated at: {moment(repo.updated_at).format('DD/MM/YYYY')}
+            </Text>
             <View style={styles.UserDetailsContainer}>
                 <DefaultCard.Image
                     style={styles.ProfileImage}
@@ -43,7 +42,6 @@ export default Card;
 
 const styles = StyleSheet.create({
     Card: {
-        // width: '95%',
         paddingTop: 10,
         paddingHorizontal: 10,
         marginTop: 0,
@@ -61,21 +59,20 @@ const styles = StyleSheet.create({
         height: 40,
         width: 40,
         borderRadius: 40,
+        borderWidth: 1,
+        borderColor: 'lightblue'
     },
     UserDetailsContainer: {
         flexDirection: 'row',
         alignItems: 'center'
     },
-    FavoriteButton: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        padding: 8,
-        backgroundColor: 'lightgrey',
-        borderRadius: 50,
-    },
     ColumnContainer: {
+        // position: 'absolute', //cause the onPress to act differently
+        // top: 0,
+        // right: 0,
         flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     Title: {
         fontWeight: 'bold',

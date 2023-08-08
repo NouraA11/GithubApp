@@ -26,29 +26,32 @@ const Home = () => {
         }
     }
 
-    const { data, isLoading, isError, error, isFetching, refetch, isRefetching, fetchNextPage, hasNextPage, isFetchingNextPage } = useSearch(query);
+    const { data, isLoading, isError, error, isFetching, refetch, isRefetching, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useSearch(query);
 
     return (
         <View style={styles.MainContainer}>
             <SearchBar onChangeText={handleSearch} />
-            <ScrollView onScrollEndDrag={handleLoadMore}>
-                {isLoading || isFetching ?
-                    <ActivityIndicator />
-                    : isError ?
-                        <Text>{error.message}</Text>
-                        : data?.pages.map((page) =>
-                            page.data.items.map((repo) => {
-                                return (
-                                    <View key={repo.id}>
-                                        <Card repo={repo} />
-                                    </View>
+            {!query ?
+                <Text style={styles.Text}>Try searching to find interesting repositories</Text>
+                : <ScrollView onScrollEndDrag={handleLoadMore}>
+                    {isLoading || isFetching ?
+                        <ActivityIndicator />
+                        : isError ?
+                            <Text>{error.message}</Text>
+                            : status === "success" && data?.pages[0]?.data.total_count === 0 ?
+                                <Text style={styles.Text}>No repositories were found</Text>
+                                : data?.pages.map((page) =>
+                                    page.data.items.map((repo) => {
+                                        return (
+                                            <View key={`${repo.id}-${repo.name}`}>
+                                                <Card repo={repo} />
+                                            </View>
+                                        )
+                                    })
                                 )
-                            })
-
-
-                        )
-                }
-            </ScrollView>
+                    }
+                </ScrollView>
+            }
             {
                 isFetchingNextPage ? <ActivityIndicator /> : null
             }
@@ -65,4 +68,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center'
     },
+    Text: {
+        fontSize: 18,
+        textAlign: 'center',
+        marginTop: 50,
+    }
 })
