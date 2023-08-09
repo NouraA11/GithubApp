@@ -7,7 +7,7 @@ const SearchBar = ({ onChangeText }) => {
     const [searchValue, setSearchValue] = useDebounce();
 
     const handleSearch = (value) => {
-        if (value.replace(/[^ \w_@./#&+-]*$/, "") !== "") {
+        if (value.replace(/[^\w_@./#&+-]*$/, "") !== "") {
             setSearchValue(value)
             onChangeText(value)
         }
