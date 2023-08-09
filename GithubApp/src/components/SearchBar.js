@@ -7,8 +7,10 @@ const SearchBar = ({ onChangeText }) => {
     const [searchValue, setSearchValue] = useDebounce();
 
     const handleSearch = (value) => {
-        setSearchValue(value)
-        onChangeText(value)
+        if (value.replace(/[^ \w_@./#&+-]*$/, "") !== "") {
+            setSearchValue(value)
+            onChangeText(value)
+        }
     }
 
     return (
@@ -17,8 +19,8 @@ const SearchBar = ({ onChangeText }) => {
             inputContainerStyle={styles.SearchBar}
             inputStyle={styles.Text}
             round
-            placeholder="Search here ..."
-            placeholderTextColor="black"
+            placeholder="Search for a repository ..."
+            placeholderTextColor="grey"
             value={searchValue}
             onChangeText={handleSearch}
         />

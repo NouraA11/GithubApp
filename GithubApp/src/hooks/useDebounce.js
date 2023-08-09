@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export function useDebounce(delay = 2000) {
+export function useDebounce(delay = 3000) {
     const [searchValue, setSearchValue] = useState(null);
     const [searchQuery, setSearchQuery] = useState(null);
 

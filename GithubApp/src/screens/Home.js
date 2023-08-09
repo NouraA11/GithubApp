@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text, ActivityIndicator, ScrollView } from 'react-native';
+import React, { memo, useState } from "react";
+import { StyleSheet, SafeAreaView, Text, ActivityIndicator, FlatList } from 'react-native';
 import SearchBar from "../components/SearchBar";
 import Card from '../components/Card';
 import useRepos from "../hooks/useRepos";
@@ -12,10 +12,12 @@ const Home = () => {
         console.log('Successfully fetched')
     }
     const onError = (error) => {
-        console.log('Error encountered', error.message)
+        console.log('Error encountered ', error.message)
     }
 
-    const { data, isLoading, isError, error, isFetching, refetch, isRefetching, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useSearch(query, onSuccess, onError);
+    const { data: initialData, isLoading: isLoadingInitial, isError: isErrorInitial, error: errorInitial, isFetching: isFetchingInitial, } = useRepos(query, onSuccess, onError)
+    const { data: searchData, isLoading: isLoadingSearch, isError: isErrorSearch, error: errorSearch, isFetching: isFetchingSearch,
+        refetch, isRefetching, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useSearch(query, onSuccess, onError);
 
     const handleSearch = (value) => {
         setQuery(value)
@@ -28,45 +30,44 @@ const Home = () => {
         }
     }
 
-    const RepoList = () => {
+    const renderItem = ({ item }) => <Card repo={item} />
+
+    const initialDataItems = initialData?.data;
+    const searchDataItems = searchData?.pages?.map(page => page.data.items).flat();
+
+    const RepoList = memo(() => {
         return (
-            data?.pages.map((page) =>
-                page.data.items.map((repo) => {
-                    return (
-                        <View key={`${repo.id}-${repo.name}`}>
-                            <Card repo={repo} />
-                        </View>
-                    )
-                })
-            )
+            <FlatList
+                keyExtractor={(item, index) => `${index}-${item.id}`}
+                data={!query ? initialDataItems : searchDataItems}
+                renderItem={renderItem}
+                initialNumToRender={20}
+                onEndReached={handleLoadMore}
+                onEndReachedThreshold={0.5}
+            />
         )
-    }
-    const NoData = () => {
-        return (
-            <Text style={styles.Text}>No repositories were found</Text>
-        )
-    }
+    })
+    const NoData = () => (
+        <Text style={styles.Text}>No repositories were found</Text>
+    )
 
     return (
-        <View style={styles.MainContainer}>
+        <SafeAreaView style={styles.MainContainer}>
             <SearchBar onChangeText={handleSearch} />
             {!query ?
-                <Text style={styles.Text}>Try searching to find interesting repositories</Text>
-                : <ScrollView onScrollEndDrag={handleLoadMore}>
-                    {isLoading ?
-                        <ActivityIndicator />
-                        : isError ?
-                            <Text>{error.message}</Text>
-                            : status === "success" && data?.pages[0]?.data.total_count === 0 ?
-                                <NoData />
-                                : <RepoList />
-                    }
-                </ScrollView>
+                <RepoList />
+                : isLoadingInitial || isLoadingSearch ?
+                    <ActivityIndicator />
+                    : isErrorInitial || isErrorSearch ?
+                        <Text style={styles.Text}>Something went wrong, please try again</Text>
+                        : status === "success" && searchData?.pages && searchData?.pages[0]?.data.total_count === 0 ?
+                            <NoData />
+                            : <RepoList />
             }
             {
                 isFetchingNextPage && <ActivityIndicator />
             }
-        </View >
+        </SafeAreaView >
     );
 }
 
@@ -75,13 +76,12 @@ export default Home;
 const styles = StyleSheet.create({
     MainContainer: {
         height: '100%',
-        padding: 5,
         backgroundColor: 'white',
         alignItems: 'center'
     },
     Text: {
         fontSize: 18,
         textAlign: 'center',
-        marginTop: 50,
+        marginTop: 40,
     }
 })

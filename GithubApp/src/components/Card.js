@@ -1,6 +1,5 @@
-import React from "react";
-import { Text, TouchableOpacity } from "react-native";
-import { View, StyleSheet } from "react-native";
+import React, { memo } from "react";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import FavoriteButton from "./FavoriteButton";
 import { Card as DefaultCard } from 'react-native-elements';
 import moment from "moment/moment";
@@ -15,9 +14,10 @@ const Card = ({ repo }) => {
                 </DefaultCard.Title>
                 <FavoriteButton repo={repo} />
             </View>
-            <Text style={styles.Text}>
-                {repo.forks_count} forks | updated at: {moment(repo.updated_at).format('DD/MM/YYYY')}
-            </Text>
+            {repo.forks_count && repo.updated_at &&
+                <Text style={styles.Text}>
+                    {repo.forks_count} forks | updated at: {moment(repo.updated_at).format('DD/MM/YYYY')}
+                </Text>}
             <View style={styles.UserDetailsContainer}>
                 <DefaultCard.Image
                     style={styles.ProfileImage}
@@ -38,7 +38,7 @@ const Card = ({ repo }) => {
     );
 }
 
-export default Card;
+export default memo(Card);
 
 const styles = StyleSheet.create({
     Card: {
@@ -68,8 +68,6 @@ const styles = StyleSheet.create({
     },
     ColumnContainer: {
         // position: 'absolute', //cause the onPress to act differently
-        // top: 0,
-        // right: 0,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -90,5 +88,4 @@ const styles = StyleSheet.create({
         color: 'grey',
         marginEnd: 5,
     }
-
 })
