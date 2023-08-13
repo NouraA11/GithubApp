@@ -1,8 +1,8 @@
-import React, { memo, useState } from "react";
-import { SafeAreaView, Text, ActivityIndicator, FlatList } from 'react-native';
+import React, { useState } from "react";
+import { SafeAreaView, Text, ActivityIndicator } from 'react-native';
 import {styles} from './Home.style';
 import SearchBar from "../../components/SearchBar/SearchBar";
-import Card from '../../components/Card/Card';
+import RepoList from "../../components/RepoList/RepoList";
 import useRepos from "../../hooks/useRepos";
 import useSearch from '../../hooks/useSearch';
 
@@ -21,7 +21,7 @@ const Home = () => {
         refetch, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useSearch(query, onSuccess, onError);
 
     const handleSearch = (value) => {
-        setQuery(value)
+        setQuery(encodeURIComponent(value))
         refetch()
     }
 
@@ -31,43 +31,43 @@ const Home = () => {
         }
     }
 
-    const renderItem = ({ item }) => <Card repo={item} />
-
     const initialDataItems = initialData?.data;
     const searchDataItems = searchData?.pages?.map(page => page.data.items).flat();
 
-    const RepoList = memo(() => {
-        return (
-            <FlatList
-                keyExtractor={(item, index) => `${index}-${item.id}`}
-                data={!query ? initialDataItems : searchDataItems}
-                renderItem={renderItem}
-                initialNumToRender={20}
-                onEndReached={handleLoadMore}
-                onEndReachedThreshold={0.5}
-                ListFooterComponent={
-                    isFetchingNextPage && <ActivityIndicator />
-            }
-            />
-        )
-    })
-    const NoData = () => (
-        <Text style={styles.text}>No repositories were found</Text>
-    )
+    const RepoListProps = {
+        query,
+        initialDataItems, 
+        searchDataItems,
+        isFetchingNextPage, 
+        handleLoadMore}
+        
+    const renderComponents = () => {
+
+        if (!query){
+            return (
+            <RepoList RepoListProps={RepoListProps}/>
+            )
+        }
+
+        if (isLoadingInitial || isLoadingSearch) {
+           return <ActivityIndicator />
+        }
+
+        if (isErrorInitial || isErrorSearch) {
+            return <Text style={styles.text}>Something went wrong, please try again</Text>
+        }
+
+        if (status === "success" && searchData?.pages && searchData?.pages[0]?.data.total_count === 0) {
+            return <Text style={styles.text}>No repositories were found</Text>
+        }
+
+         return <RepoList RepoListProps={RepoListProps} />
+    }
 
     return (
         <SafeAreaView style={styles.mainContainer}>
             <SearchBar onChangeText={handleSearch} />
-            {!query ?
-                <RepoList />
-                : isLoadingInitial || isLoadingSearch ?
-                    <ActivityIndicator />
-                    : isErrorInitial || isErrorSearch ?
-                        <Text style={styles.text}>Something went wrong, please try again</Text>
-                        : status === "success" && searchData?.pages && searchData?.pages[0]?.data.total_count === 0 ?
-                            <NoData />
-                            : <RepoList />
-            }
+            {renderComponents()}
         </SafeAreaView >
     );
 }
