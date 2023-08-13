@@ -8,7 +8,7 @@ const Favorites = () => {
     const favoriteList = useSelector((state) => state.Favorite);
 
     return (
-        <ScrollView style={styles.MainContainer}>
+        <ScrollView style={styles.mainContainer}>
             {favoriteList && favoriteList.length != 0 ?
                 favoriteList?.map((repo) => {
                     return (
@@ -17,7 +17,7 @@ const Favorites = () => {
                         </View>
                     )
                 })
-                : <Text style={styles.Text}>You have no favorite repositories</Text>
+                : <Text style={styles.text}>You have no favorite repositories</Text>
             }
         </ScrollView>
     );

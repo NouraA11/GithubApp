@@ -49,18 +49,18 @@ const Home = () => {
         )
     })
     const NoData = () => (
-        <Text style={styles.Text}>No repositories were found</Text>
+        <Text style={styles.text}>No repositories were found</Text>
     )
 
     return (
-        <SafeAreaView style={styles.MainContainer}>
+        <SafeAreaView style={styles.mainContainer}>
             <SearchBar onChangeText={handleSearch} />
             {!query ?
                 <RepoList />
                 : isLoadingInitial || isLoadingSearch ?
                     <ActivityIndicator />
                     : isErrorInitial || isErrorSearch ?
-                        <Text style={styles.Text}>Something went wrong, please try again</Text>
+                        <Text style={styles.text}>Something went wrong, please try again</Text>
                         : status === "success" && searchData?.pages && searchData?.pages[0]?.data.total_count === 0 ?
                             <NoData />
                             : <RepoList />

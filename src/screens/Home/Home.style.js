@@ -2,12 +2,12 @@ import { StyleSheet } from "react-native";
 
 
 export const styles = StyleSheet.create({
-    MainContainer: {
+    mainContainer: {
         height: '100%',
         backgroundColor: "#ffffff",
         alignItems: 'center'
     },
-    Text: {
+    text: {
         fontSize: 18,
         textAlign: 'center',
         marginTop: 40,

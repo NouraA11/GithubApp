@@ -11,14 +11,13 @@ const NavigationComponent = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Home"
-                screenOptions={{
-                    headerBackVisible: false,
+                initialRouteName="Home">
+                <Stack.Screen name="Home" component={Home} 
+                options={{
                     headerRight: () => (
                         <NavigationButton />
                     )
-                }}>
-                <Stack.Screen name="Home" component={Home} />
+                }}/>
                 <Stack.Screen name="Favorites" component={Favorites} />
             </Stack.Navigator>
         </NavigationContainer>
