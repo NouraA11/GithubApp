@@ -1,9 +1,10 @@
 import React, { memo, useState } from "react";
-import { StyleSheet, SafeAreaView, Text, ActivityIndicator, FlatList } from 'react-native';
-import SearchBar from "../components/SearchBar/SearchBar";
-import Card from '../components/Card/Card';
-import useRepos from "../hooks/useRepos";
-import useSearch from '../hooks/useSearch';
+import { SafeAreaView, Text, ActivityIndicator, FlatList } from 'react-native';
+import {styles} from './Home.style';
+import SearchBar from "../../components/SearchBar/SearchBar";
+import Card from '../../components/Card/Card';
+import useRepos from "../../hooks/useRepos";
+import useSearch from '../../hooks/useSearch';
 
 const Home = () => {
     const [query, setQuery] = useState('');
@@ -72,16 +73,3 @@ const Home = () => {
 }
 
 export default Home;
-
-const styles = StyleSheet.create({
-    MainContainer: {
-        height: '100%',
-        backgroundColor: 'white',
-        alignItems: 'center'
-    },
-    Text: {
-        fontSize: 18,
-        textAlign: 'center',
-        marginTop: 40,
-    }
-})

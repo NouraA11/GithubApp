@@ -1,7 +1,8 @@
 import React from "react";
-import { Text, View, StyleSheet, ScrollView } from "react-native";
-import Card from "../components/Card/Card";
+import { Text, View, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
+import {styles} from './Favorites.style';
+import Card from "../../components/Card/Card";
 
 const Favorites = () => {
     const favoriteList = useSelector((state) => state.Favorite);
@@ -23,15 +24,3 @@ const Favorites = () => {
 }
 
 export default Favorites;
-
-const styles = StyleSheet.create({
-    MainContainer: {
-        paddingTop: 10,
-        backgroundColor: 'white'
-    },
-    Text: {
-        fontSize: 18,
-        textAlign: 'center',
-        marginTop: 50,
-    }
-})
