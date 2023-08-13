@@ -1,18 +1,18 @@
 import React from "react";
 import { configureStore } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
+import { persistReducer, persistStore } from "redux-persist";
 import { combineReducers } from "redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import FavoriteReducer from '../reducers/Favorite';
+import FavoriteReducer from './Favorite';
 
 const reducers = combineReducers({
     Favorite: FavoriteReducer
 })
-const persisteConfig = {
+const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
 }
-const persistedReducer = persistReducer(persisteConfig, reducers);
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
     reducer: persistedReducer,
@@ -21,3 +21,5 @@ export const store = configureStore({
             serializableCheck: false
         }),
 })
+
+export const persistor = persistStore(store);

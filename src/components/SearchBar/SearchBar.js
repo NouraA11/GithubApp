@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchBar as DefaultSearchBar } from "react-native-elements";
-import { StyleSheet } from "react-native";
+import { styles } from "./SearchBar.style";
 import { useDebounce } from '../../hooks/useDebounce';
 
 const SearchBar = ({ onChangeText }) => {
@@ -15,9 +15,9 @@ const SearchBar = ({ onChangeText }) => {
 
     return (
         <DefaultSearchBar
-            containerStyle={styles.SearchBarContainer}
-            inputContainerStyle={styles.SearchBar}
-            inputStyle={styles.Text}
+            containerStyle={styles.searchBarContainer}
+            inputContainerStyle={styles.searchBar}
+            inputStyle={styles.text}
             round
             placeholder="Search for a repository ..."
             placeholderTextColor="grey"
@@ -28,25 +28,3 @@ const SearchBar = ({ onChangeText }) => {
 }
 
 export default SearchBar;
-
-const styles = StyleSheet.create({
-    SearchBarContainer: {
-        marginBottom: 10,
-        backgroundColor: 'white',
-        borderColor: 'transparent',
-    },
-    SearchBar: {
-        width: '100%',
-        backgroundColor: 'white',
-        // borderWidth: 2, //didn't work
-        borderBottomWidth: 2,
-        borderTopWidth: 2,
-        borderLeftWidth: 2,
-        borderRightWidth: 2,
-        borderColor: 'lightblue',
-        paddingHorizontal: 10,
-    },
-    Text: {
-        color: 'black'
-    },
-})
