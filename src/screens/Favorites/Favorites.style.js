@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     MainContainer: {
         paddingTop: 10,
-        backgroundColor: 'white'
+        backgroundColor: "#ffffff"
     },
     Text: {
         fontSize: 18,

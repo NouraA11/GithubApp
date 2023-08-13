@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         marginTop: 0,
         marginBottom: 10,
         borderRadius: 10,
-        backgroundColor: "#fff",
+        backgroundColor: "#ffffff",
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
         width: 40,
         borderRadius: 40,
         borderWidth: 1,
-        borderColor: 'lightblue'
+        borderColor: '#ADD8E6'
     },
     userDetailsContainer: {
         flexDirection: 'row',
@@ -34,21 +34,21 @@ export const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        color: 'darkblue',
+        color: '#000080',
         fontSize: 18,
         textAlign: 'left',
         marginTop: 5,
     },
     body: {
         fontSize: 16,
-        color: 'black',
+        color: '#000000',
         marginVertical: 10,
     },
     text: {
-        color: 'grey',
+        color: '#808080',
         marginEnd: 5,
     },
     userName: { 
-        color: 'black' 
+        color: '#000000' 
     }
 })

@@ -43,7 +43,7 @@ const FavoriteButton = ({ repo }) => {
 
     return (
         <TouchableOpacity onPress={handleClick}>
-            <Icon name={iconName} size={30} color="black" />
+            <Icon name={iconName} size={30} color="#000000" />
         </TouchableOpacity>
     );
 }

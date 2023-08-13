@@ -20,7 +20,7 @@ const SearchBar = ({ onChangeText }) => {
             inputStyle={styles.text}
             round
             placeholder="Search for a repository ..."
-            placeholderTextColor="grey"
+            placeholderTextColor="#808080"
             value={searchValue}
             onChangeText={handleSearch}
         />

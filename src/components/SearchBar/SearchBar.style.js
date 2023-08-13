@@ -3,21 +3,21 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     searchBarContainer: {
         marginBottom: 10,
-        backgroundColor: 'white',
+        backgroundColor: "#ffffff",
         borderColor: 'transparent',
     },
     searchBar: {
         width: '100%',
-        backgroundColor: 'white',
+        backgroundColor: "#ffffff",
         // borderWidth: 2, //didn't work
         borderBottomWidth: 2,
         borderTopWidth: 2,
         borderLeftWidth: 2,
         borderRightWidth: 2,
-        borderColor: 'lightblue',
+        borderColor: '#ADD8E6',
         paddingHorizontal: 10,
     },
     text: {
-        color: 'black'
+        color: '#000000'
     },
 })
