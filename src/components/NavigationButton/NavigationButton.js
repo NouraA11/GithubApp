@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { TouchableOpacity } from 'react-native';
 import { Icon } from "react-native-elements";

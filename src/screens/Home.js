@@ -1,9 +1,9 @@
 import React, { memo, useState } from "react";
 import { StyleSheet, SafeAreaView, Text, ActivityIndicator, FlatList } from 'react-native';
-import SearchBar from "../components/SearchBar";
-import Card from '../components/Card';
+import SearchBar from "../components/SearchBar/SearchBar";
+import Card from '../components/Card/Card';
 import useRepos from "../hooks/useRepos";
-import useSearch from "../hooks/useSearch";
+import useSearch from '../hooks/useSearch';
 
 const Home = () => {
     const [query, setQuery] = useState('');

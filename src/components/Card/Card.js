@@ -1,6 +1,6 @@
 import React, { memo } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import FavoriteButton from "./FavoriteButton";
+import { View, StyleSheet, Text } from "react-native";
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import { Card as DefaultCard } from 'react-native-elements';
 import moment from "moment/moment";
 

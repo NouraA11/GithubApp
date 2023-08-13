@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet, ScrollView } from "react-native";
-import Card from "../components/Card";
+import Card from "../components/Card/Card";
 import { useSelector } from "react-redux";
 
 const Favorites = () => {

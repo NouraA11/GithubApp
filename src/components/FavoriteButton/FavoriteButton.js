@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavorite, removeFavorite, searchFavorite } from "../reducers/Favorite";
+import { addFavorite, removeFavorite, searchFavorite } from "../../reducers/Favorite";
 import { useNavigationState } from "@react-navigation/native";
 
 const FavoriteButton = ({ repo }) => {
