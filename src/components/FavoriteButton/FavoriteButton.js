@@ -15,11 +15,7 @@ const FavoriteButton = ({ repo }) => {
 
     const searchFavorite = () => {
         const repository = favoriteList?.filter((favRepo) => favRepo.id === repo.id);
-        if (repository?.length != 0) {
-            return true;
-        } else {
-            return false;
-        }
+         return repository?.length != 0 ;
     }
 
     useEffect(() => {

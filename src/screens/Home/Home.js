@@ -16,9 +16,9 @@ const Home = () => {
         console.log('Error encountered ', error.message)
     }
 
-    const { data: initialData, isLoading: isLoadingInitial, isError: isErrorInitial, error: errorInitial, isFetching: isFetchingInitial, } = useRepos(query, onSuccess, onError)
-    const { data: searchData, isLoading: isLoadingSearch, isError: isErrorSearch, error: errorSearch, isFetching: isFetchingSearch,
-        refetch, isRefetching, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useSearch(query, onSuccess, onError);
+    const { data: initialData, isLoading: isLoadingInitial, isError: isErrorInitial } = useRepos(query, onSuccess, onError)
+    const { data: searchData, isLoading: isLoadingSearch, isError: isErrorSearch, 
+        refetch, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useSearch(query, onSuccess, onError);
 
     const handleSearch = (value) => {
         setQuery(value)
@@ -45,6 +45,9 @@ const Home = () => {
                 initialNumToRender={20}
                 onEndReached={handleLoadMore}
                 onEndReachedThreshold={0.5}
+                ListFooterComponent={
+                    isFetchingNextPage && <ActivityIndicator />
+            }
             />
         )
     })
@@ -64,9 +67,6 @@ const Home = () => {
                         : status === "success" && searchData?.pages && searchData?.pages[0]?.data.total_count === 0 ?
                             <NoData />
                             : <RepoList />
-            }
-            {
-                isFetchingNextPage && <ActivityIndicator />
             }
         </SafeAreaView >
     );

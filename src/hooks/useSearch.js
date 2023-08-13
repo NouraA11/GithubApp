@@ -20,7 +20,7 @@ const useSearch = (query, onSuccess, onError) => {
                 }
                 return lastPageParam + 1
             },
-            enabled: query !== '',
+            enabled: !!query,
             onSuccess,
             onError
         })

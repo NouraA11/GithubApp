@@ -7,7 +7,7 @@ const NavigationButton = () => {
     const navigation = useNavigation();
 
     const handleClick = () => {
-            navigation.navigate('Favorites');
+        navigation.navigate('Favorites');
     }
 
     return (

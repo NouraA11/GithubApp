@@ -9,6 +9,7 @@ const Card = ({ repo }) => {
     const {name, forks_count, updated_at, owner, description = 'No description available'} = repo;
     const {avatar_url ='https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg', 
         login, type} = owner;
+
     return (
         <DefaultCard
             containerStyle={styles.card}>
@@ -18,10 +19,13 @@ const Card = ({ repo }) => {
                 </DefaultCard.Title>
                 <FavoriteButton repo={repo} />
             </View>
+
             {forks_count && updated_at &&
                 <Text style={styles.text}>
                     {forks_count} forks | updated at: {dayjs(updated_at).format('DD/MM/YYYY')}
-                </Text>}
+                </Text>
+            }
+
             <View style={styles.userDetailsContainer}>
                 <DefaultCard.Image
                     style={styles.profileImage}
@@ -30,14 +34,18 @@ const Card = ({ repo }) => {
                             avatar_url
                     }}
                 />
+
                 <View >
                     <Text style={styles.userName}>{login}</Text>
                     <Text style={styles.text}>{type}</Text>
                 </View>
+
             </View>
+            
             <Text style={styles.body}>
                 {description}
             </Text>
+            
         </DefaultCard>
     );
 }
