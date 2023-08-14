@@ -25,7 +25,6 @@ const Home = () => {
 
     const handleSearch = (value) => {
         setQuery(encodeURIComponent(value))
-        refetch()
     }
 
     const handleLoadMore = () => {
