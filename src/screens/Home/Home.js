@@ -20,6 +20,9 @@ const Home = () => {
     const { data: searchData, isLoading: isLoadingSearch, isError: isErrorSearch, 
         refetch, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useSearch(query, onSuccess, onError);
 
+        const isSearchSuccess = status === "success";
+        const isNoSearchData = searchData?.pages && searchData?.pages[0]?.data.total_count === 0;
+
     const handleSearch = (value) => {
         setQuery(encodeURIComponent(value))
         refetch()
@@ -41,12 +44,12 @@ const Home = () => {
         isFetchingNextPage, 
         handleLoadMore}
         
+    const renderRepoList = () => <RepoList {...RepoListProps}/>
+
     const renderComponents = () => {
 
         if (!query){
-            return (
-            <RepoList RepoListProps={RepoListProps}/>
-            )
+            return renderRepoList()
         }
 
         if (isLoadingInitial || isLoadingSearch) {
@@ -57,11 +60,11 @@ const Home = () => {
             return <Text style={styles.text}>Something went wrong, please try again</Text>
         }
 
-        if (status === "success" && searchData?.pages && searchData?.pages[0]?.data.total_count === 0) {
+        if (isSearchSuccess && isNoSearchData) {
             return <Text style={styles.text}>No repositories were found</Text>
         }
 
-         return <RepoList RepoListProps={RepoListProps} />
+        return renderRepoList()
     }
 
     return (

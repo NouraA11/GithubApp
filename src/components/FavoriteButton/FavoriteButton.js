@@ -8,19 +8,14 @@ import { useNavigationState } from "@react-navigation/native";
 const FavoriteButton = ({ repo }) => {
     const dispatch = useDispatch();
     const [iconName, setIconName] = useState('favorite-border');
-    const [isFavorite, setIsFavorite] = useState(false);
     const favoriteList = useSelector((state) => state.Favorite);
     const screenName = useNavigationState((state) => state.routes[state.index].name);
 
-
-    const searchFavorite = () => {
-        const repository = favoriteList?.filter((favRepo) => favRepo.id === repo.id);
-         return repository?.length != 0 ;
-    }
+    const repository = favoriteList?.filter((favRepo) => favRepo.id === repo.id);
+    const [isFavorite, setIsFavorite] = useState(repository?.length != 0);
 
     useEffect(() => {
-        setIsFavorite(searchFavorite())
-        if (isFavorite || screenName === 'Favorites') {
+        if (isFavorite ) {
             setIconName('favorite')
         } else {
             setIconName('favorite-border')
@@ -28,7 +23,7 @@ const FavoriteButton = ({ repo }) => {
     }, [])
 
     const handleClick = () => {
-        if (searchFavorite()) {
+        if (isFavorite) {
             setIconName('favorite-border')
             dispatch(removeFavorite(repo))
         } else {

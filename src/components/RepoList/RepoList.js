@@ -4,12 +4,7 @@ import Card from '../../components/Card/Card';
 
 const renderItem = ({ item }) => <Card repo={item} />
 
-const RepoList = ({RepoListProps}) => {
-    const {query,
-        initialDataItems, 
-        searchDataItems,
-        handleLoadMore,
-        isFetchingNextPage} = RepoListProps;
+const RepoList = ({ query, initialDataItems, searchDataItems, isFetchingNextPage, handleLoadMore }) => {
 
     return (
         <FlatList
