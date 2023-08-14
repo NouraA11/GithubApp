@@ -4,21 +4,25 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../screens/home/Home";
 import Favorites from "../screens/favorites/Favorites";
 import NavigationButton from "../components/NavigationButton/NavigationButton";
+import {screenNames} from '../utils/constants'
 
 const Stack = createNativeStackNavigator();
 
 const NavigationComponent = () => {
+    const {home, favorite} = screenNames;
+    
+
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Home">
-                <Stack.Screen name="Home" component={Home} 
+                initialRouteName={home}>
+                <Stack.Screen name={home} component={Home} 
                 options={{
                     headerRight: () => (
                         <NavigationButton />
                     )
                 }}/>
-                <Stack.Screen name="Favorites" component={Favorites} />
+                <Stack.Screen name={favorite} component={Favorites} />
             </Stack.Navigator>
         </NavigationContainer>
     );

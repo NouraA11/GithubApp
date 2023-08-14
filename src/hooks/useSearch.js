@@ -1,18 +1,20 @@
 import React from "react";
-import axios from "axios";
-import Config from "react-native-config";
 import { useInfiniteQuery } from "react-query";
+import { queryKeysList } from "../utils/constants";
+import { SEARCH_DATA_PER_PAGE } from "../utils/config";
+import instance from "../utils/instance";
 
 const fetchRepos = ({ pageParam = 1, queryKey }) => {
     const [, query] = queryKey;
-    axios.defaults.headers.common['Authorization'] = Config.GITHUB_ACCESS_TOKEN;
-    return axios.get(`https://api.github.com/search/repositories?q=${query}&per_page=20&page=${pageParam}`)
+    return instance.get(`/search/repositories?q=${query}&per_page=${SEARCH_DATA_PER_PAGE}&page=${pageParam}`)
 }
 
 const useSearch = (query, onSuccess, onError) => {
+    const {SEARCH_REPOS_KEY} = queryKeysList;
+
     return (
         useInfiniteQuery({
-            queryKey: ['searchRepositories', query],
+            queryKey: [SEARCH_REPOS_KEY, query],
             queryFn: fetchRepos,
             getNextPageParam: (lastPage, lastPageParam) => {
                 if (lastPage.length === 0) {
