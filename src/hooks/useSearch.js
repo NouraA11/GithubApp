@@ -16,11 +16,11 @@ const useSearch = (query, onSuccess, onError) => {
         useInfiniteQuery({
             queryKey: [SEARCH_REPOS_KEY, query],
             queryFn: fetchRepos,
-            getNextPageParam: (lastPage, lastPageParam) => {
+            getNextPageParam: (lastPage, allPages) => {
                 if (lastPage.length === 0) {
                     return undefined
                 }
-                return lastPageParam + 1
+                return allPages.length + 1
             },
             enabled: !!query,
             onSuccess,
