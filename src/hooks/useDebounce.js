@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-export function useDebounce(delay = 3000) {
-    const [searchValue, setSearchValue] = useState(null);
-    const [searchQuery, setSearchQuery] = useState(null);
+export function useDebounce(onChangeText, delay = 1000) {
+    var delayFn;
+    
+    const timeoutFn = () => onChangeText
 
-    const applyTimeout = (delayFn) => clearTimeout(delayFn);
-    const timeoutFn = () => setSearchValue(searchQuery);
+    clearTimeout(delayFn);
+    delayFn = setTimeout(timeoutFn, delay);
 
-    useEffect(() => {
-        const delayFn = setTimeout(timeoutFn, delay);
-        return applyTimeout(delayFn)
-    }, [searchQuery, delay]);
-
-    return [searchValue, setSearchQuery];
 }

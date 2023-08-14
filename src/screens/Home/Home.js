@@ -5,6 +5,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import RepoList from "../../components/RepoList/RepoList";
 import useRepos from "../../hooks/useRepos";
 import useSearch from '../../hooks/useSearch';
+import { useDebounce } from '../../hooks/useDebounce';
 
 const Home = () => {
     const [query, setQuery] = useState('');
@@ -24,8 +25,7 @@ const Home = () => {
         const isNoSearchData = searchData?.pages && searchData?.pages[0]?.data.total_count === 0;
 
     const handleSearch = (value) => {
-        setQuery(encodeURIComponent(value))
-        refetch()
+        useDebounce(setQuery(encodeURIComponent(value)))
     }
 
     const handleLoadMore = () => {
