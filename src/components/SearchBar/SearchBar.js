@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchBar as DefaultSearchBar } from "react-native-elements";
-import { styles } from "./SearchBar.style";
+import styles from "./SearchBar.style";
 import { useDebounce } from '../../hooks/useDebounce';
 
 const SearchBar = ({ onChangeText }) => {

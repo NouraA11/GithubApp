@@ -1,4 +1,4 @@
-import React, {memo} from "react";
+import React from "react";
 import {FlatList, ActivityIndicator} from 'react-native';
 import Card from '../../components/Card/Card';
 
@@ -21,4 +21,4 @@ const RepoList = ({ query, initialDataItems, searchDataItems, isFetchingNextPage
     )
 }
 
-export default memo(RepoList);
+export default RepoList;

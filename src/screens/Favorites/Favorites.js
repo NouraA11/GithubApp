@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
-import {styles} from './Favorites.style';
+import styles from './Favorites.style';
 import Card from "../../components/Card/Card";
 
 const Favorites = () => {

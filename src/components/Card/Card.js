@@ -1,6 +1,6 @@
-import React, { memo } from "react";
+import React from "react";
 import { View, Text } from "react-native";
-import {styles} from './Card.style'
+import styles from './Card.style'
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import { Card as DefaultCard } from 'react-native-elements';
 import dayjs from 'dayjs';
@@ -50,4 +50,4 @@ const Card = ({ repo }) => {
     );
 }
 
-export default memo(Card);
+export default Card;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView, Text, ActivityIndicator } from 'react-native';
-import {styles} from './Home.style';
+import styles from './Home.style';
 import SearchBar from "../../components/SearchBar/SearchBar";
 import RepoList from "../../components/RepoList/RepoList";
 import useRepos from "../../hooks/useRepos";
