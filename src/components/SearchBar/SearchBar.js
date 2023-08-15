@@ -17,6 +17,10 @@ const SearchBar = ({ onChangeText }) => {
             debouncedFunction(value);
         }
     }
+            
+    const handleClear = () => {
+        onChangeText('')
+    }
 
     return (
         <DefaultSearchBar
@@ -28,6 +32,7 @@ const SearchBar = ({ onChangeText }) => {
             placeholderTextColor="#808080"
             value={searchValue}
             onChangeText={handleSearch}
+            onClear={handleClear}
         />
     );
 }
