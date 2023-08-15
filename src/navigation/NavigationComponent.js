@@ -8,9 +8,9 @@ import {screenNames} from '../utils/constants'
 
 const Stack = createNativeStackNavigator();
 
-const NavigationComponent = () => {
-    const {home, favorite} = screenNames;
+const {home, favorite} = screenNames;
     
+const NavigationComponent = () => {
 
     return (
         <NavigationContainer>

@@ -4,9 +4,10 @@ import { TouchableOpacity } from 'react-native';
 import { Icon } from "react-native-elements";
 import { screenNames } from "../../utils/constants";
 
+const {favorite} = screenNames;
+
 const NavigationButton = () => {
     const navigation = useNavigation();
-    const {favorite} = screenNames;
 
     const handleClick = () => {
         navigation.navigate(favorite);

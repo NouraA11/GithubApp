@@ -9,8 +9,9 @@ const fetchRepos = () => {
     return instance.get(`/repositories?per_page=${INITIAL_DATA_PER_PAGE}&sort=${SORT_BY}`);
 }
 
+const {INITIAL_REPOS_KEY} = queryKeysList;
+
 const useRepos = (query, onSuccess, onError) => {
-    const {INITIAL_REPOS_KEY} = queryKeysList;
 
     return (
         useQuery(

@@ -36,14 +36,14 @@ const Home = () => {
     const initialDataItems = initialData?.data;
     const searchDataItems = searchData?.pages?.map(page => page.data.items).flat();
 
-    const RepoListProps = {
+    const repoListProps = {
         query,
         initialDataItems, 
         searchDataItems,
         isFetchingNextPage, 
         handleLoadMore}
         
-    const renderRepoList = () => <RepoList {...RepoListProps}/>
+    const renderRepoList = () => <RepoList {...repoListProps}/>
 
     const renderComponents = () => {
 
