@@ -19,6 +19,7 @@ const SearchBar = ({ onChangeText }) => {
     }
             
     const handleClear = () => {
+        setSearchValue('')
         onChangeText('')
     }
 
