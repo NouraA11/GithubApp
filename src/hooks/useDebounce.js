@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect } from 'react';
 
-export function useDebounce(onChangeText, delay = 1000) {
-    var delayFn;
+const useDebounce = () => {
+  let timeout;
+
+  const debounce = (func, wait) => (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  }
+
+  useEffect(() => {
+
+    return () => {
+      if (!timeout) return;
+      clearTimeout(timeout);
+    }
     
-    const timeoutFn = () => onChangeText
+  }, []);
 
-    clearTimeout(delayFn);
-    delayFn = setTimeout(timeoutFn, delay);
-
+  return { debounce }
 }
+
+export default useDebounce;

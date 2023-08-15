@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { SearchBar as DefaultSearchBar } from "react-native-elements";
 import styles from "./SearchBar.style";
+import useDebounce from '../../hooks/useDebounce';
+
 
 const SearchBar = ({ onChangeText }) => {
     const [searchValue, setSearchValue] = useState('');
+    const {debounce} = useDebounce();
+    const debouncedFunction = debounce(onChangeText, 1000);
 
     const handleSearch = (value) => {
         if (value.replace(/[^\w_@./#&+-]*$/, "") !== "") {
             setSearchValue(value)
-            onChangeText(value)
+
+            // debounce(onChangeText, 2000)(value)
+            debouncedFunction(value);
         }
     }
 

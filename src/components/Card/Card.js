@@ -20,7 +20,7 @@ const Card = ({ repo }) => {
                 <FavoriteButton repo={repo} />
             </View>
 
-            {forks_count && updated_at &&
+            {!!forks_count && !!updated_at &&
                 <Text style={styles.text}>
                     {forks_count} forks | updated at: {dayjs(updated_at).format('DD/MM/YYYY')}
                 </Text>
