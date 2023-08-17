@@ -2,16 +2,12 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import NavigationComponent from './src/navigation/NavigationComponent';
 import { Provider } from 'react-redux';
-import { persistStore } from 'redux-persist';
-import { store } from './src/stores/Store';
+import {store, persistor} from './src/reducers/index';
 import { PersistGate } from 'redux-persist/integration/react';
 
 const queryClient = new QueryClient();
 
-let persistor = persistStore(store);
-
-const App = () => {
-    return (
+const App = () => (
         <QueryClientProvider client={queryClient}>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
@@ -20,6 +16,5 @@ const App = () => {
             </Provider>
         </QueryClientProvider>
     )
-}
 
 export default App;
